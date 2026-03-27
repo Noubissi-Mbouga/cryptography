@@ -1,4 +1,4 @@
-from cesar import cypher_position_letter, cesar_encrypt
+from cesar import  cesar_encrypt, cesar_decrypt
 
 def decouper(texte, taille_morceau):
     new_text = []
@@ -57,7 +57,39 @@ def vigenere(texte,cle):
 
     return cypher_text
 
-texte = "Bonjour mon ami"
-#decouper(texte,2)
-cypher_text = vigenere(texte,"bc")
-print(cypher_text)
+def vigenere_decrypt(cypherText, cle):
+    cle = cle.lower()  # la cle ne doit etre qu'en minuscule
+    l = len(cle) # la longueur de la cle
+    key = []
+    
+    
+    for caractere in cle:
+        position_caractere = ord(caractere) -97
+        key.append(position_caractere)
+    
+    if l == 1:  # on se ramene au simple dechiffrement de cesar
+        cypher_text = cesar_decrypt(cypherText, key[0])
+        return cypher_text
+    
+        
+    new_text = decouper(cypherText, l)
+    main_text = []
+
+    for i in range(len(new_text)):
+        word = new_text[i]
+        main_word = []
+        for j in range(len(word)):
+            if word[j] == " ":
+                main_word.append(word[j])
+            else:
+                main_word.append(cesar_decrypt(word[j],key[j]))
+        
+        main_word = "".join(main_word)
+        
+        main_text.append(main_word)
+    
+    main_text = "".join(main_text)
+
+    return main_text
+
+

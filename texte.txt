@@ -1,0 +1,3 @@
+On peut ajouter à tous ces modes le signe b pour ouvrir le fichier en mode binaire. Nous en verrons plus loin l'utilité, c'est un
+mode un peu particulier.
+Ici nous souhaitons lire le fichier. Nous allons donc utiliser le mode lecture
